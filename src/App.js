@@ -1,25 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import Weather from './components/Weather';
+import React,{ useState } from 'react';
+import fetchWeather from './components/fetchWeather';
+export default function App() {
+  const [query, setQuery] = useState('');
+  const [we, setWeather] = useState([]);
+  let weather
+  fetchWeather("Toronto").then(data => (weather = data));
+  console.log(weather)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <p>{weather.sys.sunrise}</p>
+  )
 }
-
-export default App;
